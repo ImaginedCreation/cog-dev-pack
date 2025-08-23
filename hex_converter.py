@@ -8,3 +8,4 @@ class HexConverter(QWidget):
         super().__init__(parent)
         self.ui=Ui_UHexConverter()
         self.ui.setupUi(self)
+        self.setWindowTitle("进制转换")

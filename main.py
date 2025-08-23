@@ -1,12 +1,14 @@
 import sys
 
 from PySide6.QtCore import Qt
+from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication, QWidget
 
 from _ui.umain import Ui_UMain
 from app_attr import GRoutes
 from configure import MakeConfig, MODE
 from hex_converter import HexConverter
+import resources_rc
 
 config=MakeConfig(MODE.PRO)
 
@@ -17,6 +19,7 @@ class MainWindow(QWidget):
         self.ui=Ui_UMain()
         self.ui.setupUi(self)
         self.setWindowTitle(config.title)
+        self.setWindowIcon(QIcon(":/icons/icons/lg.png"))
 
         self.hex_converter_win = HexConverter(self)
         self.hex_converter_win.setWindowFlags(Qt.Window | Qt.WindowStaysOnTopHint)
@@ -25,6 +28,7 @@ class MainWindow(QWidget):
     def on_to_router(self,route:GRoutes):
         if route==GRoutes.HexConverter:
             self.hex_converter_win.show()
+            self.hex_converter_win.move(self.x()+120,self.y()-120)
 
 if __name__=="__main__":
     app=QApplication()

@@ -22,10 +22,10 @@ class Ui_UMain(object):
     def setupUi(self, UMain):
         if not UMain.objectName():
             UMain.setObjectName(u"UMain")
-        UMain.resize(700, 700)
-        UMain.setMinimumSize(QSize(700, 700))
-        UMain.setMaximumSize(QSize(700, 700))
-        UMain.setBaseSize(QSize(700, 700))
+        UMain.resize(500, 300)
+        UMain.setMinimumSize(QSize(500, 300))
+        UMain.setMaximumSize(QSize(500, 300))
+        UMain.setBaseSize(QSize(500, 300))
         self.verticalLayout = QVBoxLayout(UMain)
         self.verticalLayout.setSpacing(2)
         self.verticalLayout.setObjectName(u"verticalLayout")

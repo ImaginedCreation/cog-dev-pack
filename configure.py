@@ -12,7 +12,7 @@ g_mode: MODE = MODE.PRO
 
 class MakeConfig:
     class _BaseConf:
-        title = "项目名称"
+        title = "COG Dev Pack author:github.com/cognitivepulsehub"
 
     class _DevConf(_BaseConf):
         url = "dev url"
