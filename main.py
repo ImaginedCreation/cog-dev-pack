@@ -21,8 +21,8 @@ class MainWindow(QWidget):
         self.setWindowTitle(config.title)
         self.setWindowIcon(QIcon(":/icons/icons/lg.png"))
 
-        self.hex_converter_win = HexConverter(self)
-        self.hex_converter_win.setWindowFlags(Qt.Window | Qt.WindowStaysOnTopHint)
+        self.hex_converter_win = HexConverter()
+        # self.hex_converter_win.setWindowFlags(Qt.Window | Qt.WindowStaysOnTopHint)
         self.ui.hex_converter_btn.clicked.connect(lambda:self.on_to_router(GRoutes.HexConverter))
 
     def on_to_router(self,route:GRoutes):

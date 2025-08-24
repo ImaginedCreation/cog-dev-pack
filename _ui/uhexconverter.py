@@ -30,9 +30,25 @@ class Ui_UHexConverter(object):
         UHexConverter.setBaseSize(QSize(800, 500))
         self.gridLayout = QGridLayout(UHexConverter)
         self.gridLayout.setObjectName(u"gridLayout")
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.widget = QWidget(UHexConverter)
+        self.widget.setObjectName(u"widget")
+        self.widget.setMinimumSize(QSize(0, 40))
+        self.widget.setMaximumSize(QSize(16777215, 40))
+        self.widget.setBaseSize(QSize(0, 40))
+        self.horizontalLayout_2 = QHBoxLayout(self.widget)
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.content_input = QLineEdit(self.widget)
+        self.content_input.setObjectName(u"content_input")
 
-        self.gridLayout.addItem(self.verticalSpacer, 4, 0, 1, 1)
+        self.horizontalLayout_2.addWidget(self.content_input)
+
+        self.conver_btn = QPushButton(self.widget)
+        self.conver_btn.setObjectName(u"conver_btn")
+
+        self.horizontalLayout_2.addWidget(self.conver_btn)
+
+
+        self.gridLayout.addWidget(self.widget, 1, 0, 1, 1)
 
         self.radio_group = QGroupBox(UHexConverter)
         self.radio_group.setObjectName(u"radio_group")
@@ -69,52 +85,14 @@ class Ui_UHexConverter(object):
 
         self.gridLayout.addWidget(self.radio_group, 0, 0, 1, 1)
 
-        self.widget = QWidget(UHexConverter)
-        self.widget.setObjectName(u"widget")
-        self.widget.setMinimumSize(QSize(0, 40))
-        self.widget.setMaximumSize(QSize(16777215, 40))
-        self.widget.setBaseSize(QSize(0, 40))
-        self.horizontalLayout_2 = QHBoxLayout(self.widget)
-        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.lineEdit = QLineEdit(self.widget)
-        self.lineEdit.setObjectName(u"lineEdit")
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.horizontalLayout_2.addWidget(self.lineEdit)
+        self.gridLayout.addItem(self.verticalSpacer, 3, 0, 1, 1)
 
-        self.pushButton = QPushButton(self.widget)
-        self.pushButton.setObjectName(u"pushButton")
+        self.res_table = QTableWidget(UHexConverter)
+        self.res_table.setObjectName(u"res_table")
 
-        self.horizontalLayout_2.addWidget(self.pushButton)
-
-
-        self.gridLayout.addWidget(self.widget, 1, 0, 1, 1)
-
-        self.table = QTableWidget(UHexConverter)
-        if (self.table.rowCount() < 1):
-            self.table.setRowCount(1)
-        self.table.setObjectName(u"table")
-        self.table.setMinimumSize(QSize(0, 300))
-        self.table.setMaximumSize(QSize(16777215, 300))
-        self.table.setBaseSize(QSize(0, 300))
-        self.table.setShowGrid(True)
-        self.table.setGridStyle(Qt.PenStyle.SolidLine)
-        self.table.setSortingEnabled(True)
-        self.table.setWordWrap(True)
-        self.table.setCornerButtonEnabled(False)
-        self.table.setRowCount(1)
-        self.table.setColumnCount(0)
-        self.table.horizontalHeader().setVisible(False)
-        self.table.horizontalHeader().setCascadingSectionResizes(False)
-        self.table.horizontalHeader().setDefaultSectionSize(230)
-        self.table.horizontalHeader().setHighlightSections(True)
-        self.table.horizontalHeader().setProperty(u"showSortIndicator", True)
-        self.table.horizontalHeader().setStretchLastSection(True)
-        self.table.verticalHeader().setVisible(False)
-        self.table.verticalHeader().setCascadingSectionResizes(False)
-        self.table.verticalHeader().setProperty(u"showSortIndicator", True)
-        self.table.verticalHeader().setStretchLastSection(False)
-
-        self.gridLayout.addWidget(self.table, 3, 0, 1, 1)
+        self.gridLayout.addWidget(self.res_table, 2, 0, 1, 1)
 
 
         self.retranslateUi(UHexConverter)
@@ -124,11 +102,11 @@ class Ui_UHexConverter(object):
 
     def retranslateUi(self, UHexConverter):
         UHexConverter.setWindowTitle(QCoreApplication.translate("UHexConverter", u"Form", None))
+        self.conver_btn.setText(QCoreApplication.translate("UHexConverter", u"\u8f6c\u6362", None))
         self.radio_group.setTitle("")
         self.radio_2.setText(QCoreApplication.translate("UHexConverter", u"2\u8fdb\u5236", None))
         self.radio_8.setText(QCoreApplication.translate("UHexConverter", u"8\u8fdb\u5236", None))
         self.radio_10.setText(QCoreApplication.translate("UHexConverter", u"10\u8fdb\u5236", None))
         self.radio_16.setText(QCoreApplication.translate("UHexConverter", u"16\u8fdb\u5236", None))
-        self.pushButton.setText(QCoreApplication.translate("UHexConverter", u"\u8f6c\u6362", None))
     # retranslateUi
 
