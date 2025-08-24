@@ -6,18 +6,18 @@ from _ui.uhexconverter import Ui_UHexConverter
 
 
 class _HexList(Enum):
-    Hex2 = "2进制"
-    Hex8 = "8进制"
-    Hex10 = "10进制"
-    Hex16 = "16进制"
+    BIN = "2进制"
+    OCT = "8进制"
+    DEC = "10进制"
+    HEX = "16进制"
 
 
 class _Result:
     def __init__(self):
-        self.b2 = None
-        self.b8 = None
-        self.b10 = None
-        self.b16 = None
+        self.bin = None
+        self.oct = None
+        self.dec = None
+        self.hex = None
 
 
 class HexConverter(QWidget):
@@ -27,7 +27,7 @@ class HexConverter(QWidget):
         self.ui.setupUi(self)
         self.setWindowTitle("进制转换")
         self.init_table()
-        self.render_table(_Result(),_HexList.Hex10)
+        self.render_table(_Result(),_HexList.DEC)
 
         self.ui.conver_btn.clicked.connect(self.on_converter)
 
@@ -42,73 +42,75 @@ class HexConverter(QWidget):
 
     def update_result(self, hex_t: _HexList, content):
         result=_Result()
-        current_type=_HexList.Hex2
-        if hex_t == _HexList.Hex2.value:
-           result=self.b2_converter(content)
-           current_type=_HexList.Hex2
-        elif hex_t==_HexList.Hex8.value:
-            result=self.b8_converter(content)
-            current_type=_HexList.Hex8
-        elif hex_t == _HexList.Hex10.value:
-            result = self.b10_converter(content)
-            current_type = _HexList.Hex10
-        elif hex_t == _HexList.Hex16.value:
-            result = self.b16_converter(content)
-            current_type = _HexList.Hex16
-        self.render_table(result,current_type)
-
+        current_type = _HexList.BIN
+        try:
+            if hex_t == _HexList.BIN.value:
+                result = self.bin_converter(content)
+                current_type = _HexList.BIN
+            elif hex_t == _HexList.OCT.value:
+                result = self.oct_converter(content)
+                current_type = _HexList.OCT
+            elif hex_t == _HexList.DEC.value:
+                result = self.dec_converter(content)
+                current_type = _HexList.DEC
+            elif hex_t == _HexList.HEX.value:
+                result = self.hex_converter(content)
+                current_type = _HexList.HEX
+            self.render_table(result, current_type)
+        except Exception as e:
+            self.render_table(result, current_type)
 
     def render_table(self,result:_Result,current_type:_HexList):
-        self.ui.res_table.setItem(0,0,QTableWidgetItem(_HexList.Hex2.value))
-        self.ui.res_table.setItem(0,1,QTableWidgetItem(result.b2))
+        self.ui.res_table.setItem(0,0,QTableWidgetItem(_HexList.BIN.value))
+        self.ui.res_table.setItem(0,1,QTableWidgetItem(result.bin))
         self.ui.res_table.setItem(0,2,QTableWidgetItem(f"{current_type.value}转2进制"))
 
-        self.ui.res_table.setItem(1, 0, QTableWidgetItem(_HexList.Hex8.value))
-        self.ui.res_table.setItem(1, 1, QTableWidgetItem(result.b8))
+        self.ui.res_table.setItem(1, 0, QTableWidgetItem(_HexList.OCT.value))
+        self.ui.res_table.setItem(1, 1, QTableWidgetItem(result.oct))
         self.ui.res_table.setItem(1, 2, QTableWidgetItem(f"{current_type.value}转8进制"))
 
-        self.ui.res_table.setItem(2, 0, QTableWidgetItem(_HexList.Hex10.value))
-        self.ui.res_table.setItem(2, 1, QTableWidgetItem(result.b10))
+        self.ui.res_table.setItem(2, 0, QTableWidgetItem(_HexList.DEC.value))
+        self.ui.res_table.setItem(2, 1, QTableWidgetItem(result.dec))
         self.ui.res_table.setItem(2, 2, QTableWidgetItem(f"{current_type.value}转10进制"))
 
-        self.ui.res_table.setItem(3, 0, QTableWidgetItem(_HexList.Hex16.value))
-        self.ui.res_table.setItem(3, 1, QTableWidgetItem(result.b16))
+        self.ui.res_table.setItem(3, 0, QTableWidgetItem(_HexList.HEX.value))
+        self.ui.res_table.setItem(3, 1, QTableWidgetItem(result.hex))
         self.ui.res_table.setItem(3, 2, QTableWidgetItem(f"{current_type.value}转16进制"))
 
     @staticmethod
-    def b16_converter(b16_str):
+    def hex_converter(hex_str):
         result=_Result()
-        result.b2=bin(int(b16_str,16))[2:]
-        result.b8=oct(int(b16_str,16))[2:]
-        result.b10=str(int(b16_str,16))
-        result.b16=b16_str
+        result.bin=bin(int(hex_str,16))[2:]
+        result.oct=oct(int(hex_str,16))[2:]
+        result.dec=str(int(hex_str,16))
+        result.hex=hex_str
         return result
 
     @staticmethod
-    def b10_converter(b10_str):
+    def dec_converter(dec_str):
         result=_Result()
-        result.b2=bin(int(b10_str,10))[2:]
-        result.b8=oct(int(b10_str,10))[2:]
-        result.b10=b10_str
-        result.b16=hex(int(b10_str,10))[2:]
+        result.bin=bin(int(dec_str,10))[2:]
+        result.oct=oct(int(dec_str,10))[2:]
+        result.dec=dec_str
+        result.hex=hex(int(dec_str,10))[2:]
         return result
 
     @staticmethod
-    def b8_converter(b8_str):
+    def oct_converter(oct_str):
         result=_Result()
-        result.b2=bin(int(b8_str,8))[2:]
-        result.b8=b8_str
-        result.b10=str(int(b8_str,8))
-        result.b16=hex(int(b8_str,8))[2:]
+        result.bin=bin(int(oct_str,8))[2:]
+        result.oct=oct_str
+        result.dec=str(int(oct_str,8))
+        result.hex=hex(int(oct_str,8))[2:]
         return result
 
     @staticmethod
-    def b2_converter(b2_str):
+    def bin_converter(bin_str):
         result=_Result()
-        result.b2=b2_str
-        result.b8=oct(int(b2_str,2))[2:]
-        result.b10=str(int(b2_str,2))
-        result.b16=hex(int(b2_str,2))[2:]
+        result.bin=bin_str
+        result.oct=oct(int(bin_str,2))[2:]
+        result.dec=str(int(bin_str,2))
+        result.hex=hex(int(bin_str,2))[2:]
         return result
 
     def init_table(self):
