@@ -15,8 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QLabel, QLayout, QPushButton,
-    QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QLayout,
+    QPushButton, QSizePolicy, QSpacerItem, QVBoxLayout,
+    QWidget)
 
 class Ui_UMain(object):
     def setupUi(self, UMain):
@@ -57,10 +58,24 @@ class Ui_UMain(object):
 
         self.verticalLayout.addWidget(self.header_container, 0, Qt.AlignmentFlag.AlignVCenter)
 
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.hex_converter_btn = QPushButton(UMain)
         self.hex_converter_btn.setObjectName(u"hex_converter_btn")
 
-        self.verticalLayout.addWidget(self.hex_converter_btn, 0, Qt.AlignmentFlag.AlignLeft)
+        self.horizontalLayout.addWidget(self.hex_converter_btn)
+
+        self.image_compression_btn = QPushButton(UMain)
+        self.image_compression_btn.setObjectName(u"image_compression_btn")
+
+        self.horizontalLayout.addWidget(self.image_compression_btn)
+
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout.addItem(self.horizontalSpacer)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout)
 
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
@@ -77,5 +92,6 @@ class Ui_UMain(object):
         UMain.setWindowTitle(QCoreApplication.translate("UMain", u"Form", None))
         self.title.setText(QCoreApplication.translate("UMain", u"COG Dev Pack", None))
         self.hex_converter_btn.setText(QCoreApplication.translate("UMain", u"\u8fdb\u5236\u8f6c\u6362", None))
+        self.image_compression_btn.setText(QCoreApplication.translate("UMain", u"\u56fe\u7247\u538b\u7f29", None))
     # retranslateUi
 

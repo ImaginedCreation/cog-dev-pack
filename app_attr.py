@@ -3,6 +3,7 @@ from enum import Enum
 
 class GRoutes(Enum):
     HexConverter="HexConverter"
+    ImageCompression="ImageCompression"
 
 
 
